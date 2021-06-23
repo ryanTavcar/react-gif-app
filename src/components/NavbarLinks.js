@@ -14,6 +14,9 @@ const Navbar = ({links}) => {
                 <li className="navbar-li" >
                     <NavLink to="/trending" className="navbar-link" exact activeStyle={{textDecoration: 'underline'}}>{links.trending}</NavLink>
                 </li>
+                <li className="navbar-li" >
+                    <NavLink to="/random" className="navbar-link" exact activeStyle={{textDecoration: 'underline'}}>{links.random}</NavLink>
+                </li>
             </ul>
         </nav>
     )

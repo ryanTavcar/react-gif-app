@@ -1,14 +1,36 @@
 
-.navbar-wrapper {
-    width: 100%;
-    height: auto;
-    display: flex;
-    justify-content: center;
+.sidebar-wrapper {
+    position: sticky;
+    top: 1vw;
+    left: 1vw;
+    width: 20vw;
+    height: 80vh;
+    border: 2px solid red;
 }
 
-.navbar-ul {
+.user-details{
     display: flex;
     flex-direction: row;
+}
+
+.profile-img {
+    width: 5vw;
+    height: 5vh;
+}
+
+/* .navbar-wrapper {
+    position: sticky;
+    top: 1vw;
+    left: 1vw;
+    width: 20vw;
+    height: 80vh;
+    border: 2px solid red;
+} */
+
+.navbar-ul {
+    border: 2px solid green;
+    display: flex;
+    flex-direction: column;
 }
 .navbar-li {
     padding: 0 2rem;

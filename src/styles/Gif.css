@@ -1,0 +1,63 @@
+.trending-wrapper {
+    margin: 1rem 5rem;
+    width: 40vw;
+    height: 100%;
+}
+
+.gif-list {
+    background-color: rgba(153, 143, 143, 0.836);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.gif-wrapper {
+    width: 35vw;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgba(232, 228, 228, 0.836);
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: .5px .5px 5px  black;
+}
+
+
+.gif-item {
+    list-style: none;
+}
+
+.gif-img {
+    width: 100%;
+    height: 100%;
+}
+
+.gif-utilities {
+    width: 100%;
+}
+
+.gif-icons {
+    margin-top: 1rem;
+    margin-left: 1rem;
+    width: 10vw;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.form-control {
+    padding: .5rem;
+    width: 100%;
+}
+
+.comment-field {
+    width: 100%;
+    height: 2rem;
+    padding: 1rem;
+    border-radius: 2px;
+    border-style: none;
+}
+
+
+

@@ -1,24 +1,47 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import useFetch from './useFetch';
-import '../styles/trending.css'
+import '../styles/Gif.css'
+import GifCard from './GifCard';
 
 const API_KEY = process.env.REACT_APP_API_KEY;
+let key = 0;
 
-//getting gifs of cats
-function AllGifs() {
+function AllGifs({ query }) {
 
-    const [data, isLoaded] = useFetch(`https://api.giphy.com/v1/gifs/search?api_key=${API_KEY}&q=cats&limit=25&offset=&rating=g&lang=en`)
+    const cats = 'cats'
+
+    // const [data, isLoaded] = useFetch(`https://api.giphy.com/v1/gifs/search?api_key=${API_KEY}&q=${query || cats}&limit=25&offset=&rating=r&lang=en`)
+
+    const [isLoaded, setIsLoaded] = useState(false);
+    const [data, setData] = useState([])
+    
+
+    useEffect(() => {
+        
+        const fetchData = () => {
+            fetch(`https://api.giphy.com/v1/gifs/search?api_key=${API_KEY}&q=${query || cats}&limit=25&offset=&rating=r&lang=en`)
+                .then(res => res.json())
+                .then(data => {
+                    setData(data.data);
+                    setIsLoaded(true);
+                })
+            }
+        fetchData();
+        
+    }, [query])
 
     if (isLoaded === false){
         return <p>Loading...</p>
     }
-
     return (
         <div className="trending-wrapper">
-            <ul className="gif-wrapper" >
+            <ul>
                 {data.map( gif => (
-                    <li className="gif-list" key={gif.id} >
-                        <img src={gif.images.original.url} alt="gif"width="300" height="300"></img>
+                    <li className="gif-list" key={key++} >
+                        <GifCard 
+                        gif={gif.images.original.url}
+                        />
+
                     </li>
                 ))}
             </ul>

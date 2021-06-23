@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {
     BrowserRouter as Router,
     Switch,
@@ -10,20 +10,40 @@ import { useMediaQuery } from 'react-responsive'
 import './styles/App.css';
 
 //Componenents
+import Sidebar from './components/Sidebar';
 import MobileNavbarLinks from './components/MobileNavbarLinks';
-import NavbarLinks from './components/NavbarLinks';
 import Trending from './components/Trending';
 import AllGifs from './components/AllGifs';
+import Random from './components/Random';
 
 
 const links = {
     trending: 'Trending',
-    all: 'All'
+    all: 'All',
+    random: 'Random'
 }
 
 function App() {
+
     const isSmallScreen = useMediaQuery({ minWidth: 200, maxWidth: 800 });
     const isLargeScreen = useMediaQuery({ minWidth: 801, maxWidth: 3840 });
+    const [userInput, setUserInput] = useState("");
+    const [searchInput, setSearchInput] = useState("");
+
+
+
+    const onChangeHandler = (e) => {
+        setUserInput(e.target.value)
+    }
+
+    const submitHandler = (e) => {
+        e.preventDefault();
+        setSearchInput(e.target[0].value)
+        const clearFields = () => {
+            setUserInput(e.target[0].value = '');
+        };
+        clearFields();
+    }
 
     return (
         <div className="app-container">
@@ -42,6 +62,9 @@ function App() {
                         <Route exact path="/trending">
                             <Trending />
                         </Route>
+                        <Route exact path="/random">
+                            <Random />
+                        </Route>
 
                     </Switch> 
                         
@@ -51,22 +74,29 @@ function App() {
 
         {isLargeScreen &&
             <>
-                <Router>
+                    <Router>
 
-                    <NavbarLinks
-                    links={links} 
-                    />
+                        <Sidebar
+                        userInput={userInput}
+                        onChangeHandler={onChangeHandler}
+                        submitHandler={submitHandler}
+                        />
 
-                    <Switch>
-                        <Route exact path="/">
-                            <AllGifs />
-                        </Route>
-                        <Route exact path="/trending">
-                            <Trending />
-                        </Route>
-                    </Switch> 
-                    
-                </Router>
+                        <Switch>
+                            <Route exact path="/">
+                                <AllGifs 
+                                query={searchInput}
+                                />
+                            </Route>
+                            <Route exact path="/trending">
+                                <Trending />
+                            </Route>
+                            <Route exact path="/random">
+                                <Random />
+                            </Route>
+                        </Switch> 
+                        
+                    </Router>
             </>
         
         }
